@@ -1,30 +1,30 @@
 # protoc-gen-gf
 
-从 protobuf 文件中生成使用 goframe 的 http 服务
+generate goframe biz files from protobuf
 
-## 介绍
+## Introductions
 
-- [protoc-gen-gf-api](https://github.com/zcyc/protoc-gen-gf-api) 用来生成标准路由
-- [protoc-gen-gf-controller](https://github.com/zcyc/protoc-gen-gf-controller) 用来生成控制器
-- [protoc-gen-gf-logic](https://github.com/zcyc/protoc-gen-gf-logic) 用来生成业务逻辑
-- [protoc-gen-gf-client](https://github.com/zcyc/protoc-gen-gf-client) 用来生成接口调用方法
+- [protoc-gen-gf-api](https://github.com/zcyc/protoc-gen-gf-api) for api
+- [protoc-gen-gf-controller](https://github.com/zcyc/protoc-gen-gf-controller) for controller
+- [protoc-gen-gf-logic](https://github.com/zcyc/protoc-gen-gf-logic) for logic
+- [protoc-gen-gf-client](https://github.com/zcyc/protoc-gen-gf-client) for client
 
-## 环境
+## Environment
 
-### 安装二进制
+### Download clis
 
 1. [go 1.16+](https://golang.org/dl/)
 2. [protoc](https://github.com/protocolbuffers/protobuf/releases)
 3. [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go/releases)
 
-### 下载 proto
+### Download protos
 
-1. 在 `$GOPATH/src` 中创建 `google` 目录
-2. 将 [googleapis](https://github.com/googleapis/googleapis) 项目的 `google/api` 目录下载到 `$GOPATH/src/google` 中
-3. 将 [protobuf](https://github.com/protocolbuffers/protobuf) 项目的 `src/google/protobuf` 目录下载到 `$GOPATH/src/google` 中
-4. 此时 `$GOPATH/src/google` 中应该有 `api` 和 `protobuf` 两个文件夹
+1. Create directory `google` in `$GOPATH/src`.
+2. Copy `google/api` in [googleapis](https://github.com/googleapis/googleapis) to `$GOPATH/src/google`.
+3. Copy `src/google/protobuf` in [protobuf](https://github.com/protocolbuffers/protobuf) to `$GOPATH/src/google`.
+4. Now, it has `api` and `protobuf` in `$GOPATH/src/google`.
 
-## 安装
+## Install
 
 ```bash
 go install github.com/zcyc/protoc-gen-gf-api@latest
@@ -33,13 +33,13 @@ go install github.com/zcyc/protoc-gen-gf-logic@latest
 go install github.com/zcyc/protoc-gen-gf-client@latest
 ```
 
-## 使用
+## Usages
 
-示例项目： [protoc-gen-gf-example](https://github.com/zcyc/protoc-gen-gf-example)
+Demo: [protoc-gen-gf-example](https://github.com/zcyc/protoc-gen-gf-example)
 
 ### macOS & Linux
 
-```bash
+```shell
 protoc -I ./api -I $GOPATH/src \
  --go_out ./api --go_opt=paths=source_relative \
  --gf-api_out ./api --gf-api_opt=paths=source_relative \
@@ -52,7 +52,7 @@ protoc -I ./api -I $GOPATH/src \
 ### Windows
 
 #### PowerShell
-```bash
+```shell
 protoc -I ./api -I $env:GOPATH/src `
  --go_out ./api --go_opt=paths=source_relative `
  --gf-api_out ./api --gf-api_opt=paths=source_relative `
@@ -63,7 +63,7 @@ protoc -I ./api -I $env:GOPATH/src `
 ```
 
 #### CMD
-```bash
+```shell
 protoc -I ./api -I %GOPATH%/src ^
  --go_out ./api --go_opt=paths=source_relative ^
  --gf-api_out ./api --gf-api_opt=paths=source_relative ^
@@ -73,11 +73,11 @@ protoc -I ./api -I %GOPATH%/src ^
  ./api/v1/article.proto
 ```
 
-## proto 约定
+## Conventions
 
-### method 的命名要用驼峰的"操作+资源"
+### Method name use `action + resource` in camel case.
 
-生成代码时，操作通过以下规则映射到 http 动作，资源作为 http 路径
+When generating，action will map to http method，resource will be http path
 
 - `GET, FIND, QUERY, LIST, SEARCH` -> GET
 - `POST, CREATE` -> POST
@@ -87,19 +87,19 @@ protoc -I ./api -I %GOPATH%/src ^
 ```protobuf
 service Blog {
   rpc CreateArticle(Article) returns (Article) {}
-  // 函数的操作是 Create，映射到 POST 动作，Article 为路径
-  // 所以最终生成的 http 路由是 post: /article
+  // Action is Create, map to http post method, Article will be the http path
+  // so the generate result is post: /article
 }
 ```
 
-### 使用 option (google.api.http) 指定 http 路由
+### You can use option (google.api.http) to set http method and path
 
 ```protobuf
 service Blog {
   rpc GetArticles(GetArticlesRequest) returns (GetArticlesResponse) {
     option (google.api.http) = {
       get: "/v1/articles"
-      // 使用 additional_bindings 为一个 rpc 方法指定多个 http 路由
+      // You can use additional_bindings bind multi-route for http
       additional_bindings {
         get: "/v1/author/{author_id}/articles"
       }
@@ -108,5 +108,5 @@ service Blog {
 }
 ```
 
-## 灵感来源
+## Thanks
 - [kratos](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
