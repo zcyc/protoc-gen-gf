@@ -39,7 +39,7 @@ Demo: [protoc-gen-gf-example](https://github.com/zcyc/protoc-gen-gf-example)
 
 ### macOS & Linux
 
-```shell
+```bash
 protoc -I ./api -I $GOPATH/src \
  --go_out ./api --go_opt=paths=source_relative \
  --gf-api_out ./api --gf-api_opt=paths=source_relative \
@@ -52,7 +52,7 @@ protoc -I ./api -I $GOPATH/src \
 ### Windows
 
 #### PowerShell
-```shell
+```powershell
 protoc -I ./api -I $env:GOPATH/src `
  --go_out ./api --go_opt=paths=source_relative `
  --gf-api_out ./api --gf-api_opt=paths=source_relative `
@@ -63,7 +63,7 @@ protoc -I ./api -I $env:GOPATH/src `
 ```
 
 #### CMD
-```shell
+```cmd
 protoc -I ./api -I %GOPATH%/src ^
  --go_out ./api --go_opt=paths=source_relative ^
  --gf-api_out ./api --gf-api_opt=paths=source_relative ^
