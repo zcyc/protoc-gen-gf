@@ -85,7 +85,7 @@ When generated, `Action` will be mapped as http method according to the followin
 - `PUT, UPDATE` -> PUT
 - `DELETE` -> DELETE
 
-#### example
+#### Example
 ```protobuf
 service Blog {
   rpc CreateArticle(Article) returns (Article) {}
