@@ -13,9 +13,8 @@ Generate goframe business via ProtoBuf
 
 ### Download clis
 
-1. [go 1.16+](https://golang.org/dl/)
-2. [protoc](https://github.com/protocolbuffers/protobuf/releases)
-3. [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go/releases)
+- [go 1.16+](https://golang.org/dl/)
+- [protoc](https://github.com/protocolbuffers/protobuf/releases)
 
 ### Download protos
 
@@ -27,6 +26,7 @@ Generate goframe business via ProtoBuf
 ## Install
 
 ```bash
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install github.com/zcyc/protoc-gen-gf-api@latest
 go install github.com/zcyc/protoc-gen-gf-controller@latest
 go install github.com/zcyc/protoc-gen-gf-logic@latest
