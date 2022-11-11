@@ -2,7 +2,7 @@
 
 generate goframe biz files from protobuf
 
-## Introductions
+## Introduction
 
 - [protoc-gen-gf-api](https://github.com/zcyc/protoc-gen-gf-api) for api
 - [protoc-gen-gf-controller](https://github.com/zcyc/protoc-gen-gf-controller) for controller
@@ -33,7 +33,7 @@ go install github.com/zcyc/protoc-gen-gf-logic@latest
 go install github.com/zcyc/protoc-gen-gf-client@latest
 ```
 
-## Usages
+## Usage
 
 Demo: [protoc-gen-gf-example](https://github.com/zcyc/protoc-gen-gf-example)
 
@@ -73,7 +73,7 @@ protoc -I ./api -I %GOPATH%/src ^
  ./api/v1/article.proto
 ```
 
-## Conventions
+## Convention
 
 ### Method name use `action + resource` in camel case.
 
