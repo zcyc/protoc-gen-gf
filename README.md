@@ -75,7 +75,7 @@ protoc -I ./api -I %GOPATH%/src ^
 
 ## Convention
 
-### The method name must be `Action + Resource`, for example: `CreateUser`
+### The method name must be `Action + Resource`, for example: `CreateArticle`
 
 When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path
 
@@ -89,7 +89,8 @@ When generated, `Action` will be mapped as http method according to the followin
 ```protobuf
 service Blog {
   rpc CreateArticle(Article) returns (Article) {}
-  // Action is Create, mapped to POST, Resource is User
+  // Create is Action, it mapped to POST
+  // Article is Resource, it used as path
   // So the http route is POST: /article
 }
 ```
