@@ -75,7 +75,7 @@ protoc -I ./api -I %GOPATH%/src ^
 
 ## Convention
 
-### The method name must be `Action + Resource`, for example: `CreateArticle`
+### The method name must be `Action + Resource` in camel case, for example: `CreateArticle`
 
 When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path
 
