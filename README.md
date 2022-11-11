@@ -1,6 +1,6 @@
 # protoc-gen-gf
 
-generate goframe biz files from protobuf
+Generate goframe business via ProtoBuf
 
 ## Introduction
 
@@ -75,20 +75,22 @@ protoc -I ./api -I %GOPATH%/src ^
 
 ## Convention
 
-### Method name use `action + resource` in camel case.
+### The method name must be `Action + Resource`, for example: `CreateUser`.
 
-When generating，action will map to http method，resource will be http path
+When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path.
 
+#### Rules
 - `GET, FIND, QUERY, LIST, SEARCH` -> GET
 - `POST, CREATE` -> POST
 - `PUT, UPDATE` -> PUT
 - `DELETE` -> DELETE
 
+#### example
 ```protobuf
 service Blog {
   rpc CreateArticle(Article) returns (Article) {}
-  // Action is Create, map to http post method, Article will be the http path
-  // so the generate result is post: /article
+  // Action is Create, mapped to POST, Resource is User
+  // So the http route is POST: /article
 }
 ```
 
@@ -99,7 +101,7 @@ service Blog {
   rpc GetArticles(GetArticlesRequest) returns (GetArticlesResponse) {
     option (google.api.http) = {
       get: "/v1/articles"
-      // You can use additional_bindings bind multi-route for http
+      // You can add multiple http routes using additional_bindings
       additional_bindings {
         get: "/v1/author/{author_id}/articles"
       }
