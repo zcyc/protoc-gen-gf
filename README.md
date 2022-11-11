@@ -19,10 +19,10 @@ Generate goframe business via ProtoBuf
 
 ### Download protos
 
-1. Create directory `google` in `$GOPATH/src`.
-2. Copy `google/api` in [googleapis](https://github.com/googleapis/googleapis) to `$GOPATH/src/google`.
-3. Copy `src/google/protobuf` in [protobuf](https://github.com/protocolbuffers/protobuf) to `$GOPATH/src/google`.
-4. Now, it has `api` and `protobuf` in `$GOPATH/src/google`.
+1. Create directory `google` in `$GOPATH/src`
+2. Copy `google/api` in [googleapis](https://github.com/googleapis/googleapis) to `$GOPATH/src/google`
+3. Copy `src/google/protobuf` in [protobuf](https://github.com/protocolbuffers/protobuf) to `$GOPATH/src/google`
+4. Now, it has `api` and `protobuf` in `$GOPATH/src/google`
 
 ## Install
 
@@ -75,9 +75,9 @@ protoc -I ./api -I %GOPATH%/src ^
 
 ## Convention
 
-### The method name must be `Action + Resource`, for example: `CreateUser`.
+### The method name must be `Action + Resource`, for example: `CreateUser`
 
-When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path.
+When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path
 
 #### Rules
 - `GET, FIND, QUERY, LIST, SEARCH` -> GET
