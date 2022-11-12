@@ -112,4 +112,4 @@ service Blog {
 ```
 
 ## Thanks
-- [kratos](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
+- [protoc-gen-go-http](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
