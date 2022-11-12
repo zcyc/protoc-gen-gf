@@ -1,6 +1,6 @@
 # protoc-gen-gf
 
-Generate goframe business via ProtoBuf
+Generate [goframe](https://github.com/gogf/gf) business via ProtoBuf
 
 ## Introduction
 
