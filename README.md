@@ -77,39 +77,15 @@ protoc -I ./api -I %GOPATH%/src ^
 
 ## Convention
 
-### The method name must be `Action + Resource` in camel case, for example: `CreateArticle`
-
-When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path
-
-#### Rules
-
-- `GET, FIND, QUERY, LIST, SEARCH` -> GET
-- `POST, CREATE` -> POST
-- `PUT, UPDATE` -> PUT
-- `DELETE` -> DELETE
-
-#### Example
-
-```protobuf
-service Blog {
-  rpc CreateArticle(Article) returns (Article) {}
-  // Create is Action, it mapped to POST
-  // Article is Resource, it used as path
-  // So the http route is POST: /article
-}
-```
-
-### You can use option (google.api.http) to set http method and path
-
 ```protobuf
 service Blog {
   rpc GetArticles(GetArticlesRequest) returns (GetArticlesResponse) {
     option (google.api.http) = {
       get: "/v1/articles"
       // You can add multiple http routes using additional_bindings
-      additional_bindings {
-        get: "/v1/author/{author_id}/articles"
-      }
+      // additional_bindings {
+      //   get: "/v1/author/{author_id}/articles"
+      //}
     };
   }
 }

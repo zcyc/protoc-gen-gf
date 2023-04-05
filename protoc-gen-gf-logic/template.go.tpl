@@ -74,5 +74,4 @@ func (s *s{{$.Name}}) {{ .FunctionName }} (ctx context.Context, in *model.{{ .Fu
     return nil
 }
 {{end}}
-
 {{end}}
