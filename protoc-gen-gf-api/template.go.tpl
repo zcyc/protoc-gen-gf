@@ -4,7 +4,7 @@ import (
 
 {{range .Methods}}
 type {{ .FunctionName }}Req struct {
-	g.Meta `path:"{{.Path}}" tags:"{{ $.InterfaceName }}" method:"{{.Method}}"`
+	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`
     {{range .Request.Fields }}{{ .Name}} {{ .Type}}
     {{end}}
 }
