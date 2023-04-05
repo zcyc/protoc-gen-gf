@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-option go_package = "github.com/zcyc/protoc-gen-gf/example/v1";
-
-package product.app.v1;
-
+import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+
+package test;
+option go_package = "/test";
 
 // blog service is a blog demo
 service Blog {
