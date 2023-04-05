@@ -4,10 +4,10 @@ Generate goframe business via ProtoBuf
 
 ## Introduction
 
-- [protoc-gen-gf-api](https://github.com/zcyc/protoc-gen-gf-api) for api
-- [protoc-gen-gf-controller](https://github.com/zcyc/protoc-gen-gf-controller) for controller
-- [protoc-gen-gf-logic](https://github.com/zcyc/protoc-gen-gf-logic) for logic
-- [protoc-gen-gf-client](https://github.com/zcyc/protoc-gen-gf-client) for client
+- [protoc-gen-gf-api](./protoc-gen-gf-api) for api
+- [protoc-gen-gf-controller](./protoc-gen-gf-controller) for controller
+- [protoc-gen-gf-logic](./protoc-gen-gf-logic) for logic
+- [protoc-gen-gf-client](./protoc-gen-gf-client) for client
 
 ## Environment
 
@@ -27,15 +27,15 @@ Generate goframe business via ProtoBuf
 ## Install
 
 ```bash
-go install github.com/zcyc/protoc-gen-gf-api@latest
-go install github.com/zcyc/protoc-gen-gf-controller@latest
-go install github.com/zcyc/protoc-gen-gf-logic@latest
-go install github.com/zcyc/protoc-gen-gf-client@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
 ```
 
 ## Usage
 
-Demo: [protoc-gen-gf-example](https://github.com/zcyc/protoc-gen-gf-example)
+Demo: [protoc-gen-gf-example](./example)
 
 ### macOS & Linux
 
@@ -52,6 +52,7 @@ protoc -I ./api -I $GOPATH/src \
 ### Windows
 
 #### PowerShell
+
 ```powershell
 protoc -I ./api -I $env:GOPATH/src `
  --go_out ./api --go_opt=paths=source_relative `
@@ -63,6 +64,7 @@ protoc -I ./api -I $env:GOPATH/src `
 ```
 
 #### CMD
+
 ```bash
 protoc -I ./api -I %GOPATH%/src ^
  --go_out ./api --go_opt=paths=source_relative ^
@@ -80,12 +82,14 @@ protoc -I ./api -I %GOPATH%/src ^
 When generated, `Action` will be mapped as http method according to the following rules, `Resource` will be used as http path
 
 #### Rules
+
 - `GET, FIND, QUERY, LIST, SEARCH` -> GET
 - `POST, CREATE` -> POST
 - `PUT, UPDATE` -> PUT
 - `DELETE` -> DELETE
 
 #### Example
+
 ```protobuf
 service Blog {
   rpc CreateArticle(Article) returns (Article) {}
@@ -112,4 +116,5 @@ service Blog {
 ```
 
 ## Thanks
+
 - [kratos](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
