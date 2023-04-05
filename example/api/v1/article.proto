@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/zcyc/protoc-gen-gf-example/v1";
+option go_package = "github.com/zcyc/protoc-gen-gf/example/v1";
 
 package product.app.v1;
 
