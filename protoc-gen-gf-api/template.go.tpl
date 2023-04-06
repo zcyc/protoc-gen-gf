@@ -1,7 +1,3 @@
-import (
-	"github.com/gogf/gf/v2/frame/g"
-)
-
 {{range .Methods}}
 type {{ .FunctionName }}Req struct {
 	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`

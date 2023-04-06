@@ -1,12 +1,3 @@
-import (
-	"context"
-	"errors"
-
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/net/ghttp"
-)
-
 var (
 	{{$.Name}} = c{{$.Name}}{}
 )
