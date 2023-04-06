@@ -14,11 +14,10 @@ var (
 type c{{$.Name}} struct{}
 
 {{range .Methods}}
-func (c *c{{$.Name}}) {{ .FunctionName }}(ctx context.Context, req *v1.{{ .FunctionName }}Req) (res *v1.{{ .FunctionName }}Res, err error) {
+func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
 	// 调用 service 处理请求
-	r, err := service.{{$.Name}}().{{ .FunctionName }}(ctx, &model.{{ .FunctionName }}Input{
-         {{range .Request.Fields }}
-             {{ .Name}}: req.{{ .Name}},
+	r, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
+         {{range .Request.Fields}}{{.Name}}: req.{{.Name}},
          {{end}}
 	})
 

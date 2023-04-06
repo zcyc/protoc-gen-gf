@@ -18,7 +18,7 @@ func init() {
 }
 {{range .Methods}}
 {{if eq .Method "GET"}}
-func (s *s{{$.Name}}Client) {{ .FunctionName }} (ctx context.Context, in *{{ .FunctionName }}Input) (out *{{ .FunctionName }}Output, err error) {
+func (s *s{{$.Name}}Client) {{.FunctionName}} (ctx context.Context, in *{{.FunctionName}}Input) (out *{{.FunctionName}}Output, err error) {
 	server, _ := g.Cfg().Get(ctx, "serverUri.{{$.LowerServiceName}}Server")
 	if _, err := g.Client().{{.Method}}(
 		ctx,
@@ -27,22 +27,20 @@ func (s *s{{$.Name}}Client) {{ .FunctionName }} (ctx context.Context, in *{{ .Fu
 			"id": in.Id,
 		},
 	); err != nil {
-		g.Log().Errorf(ctx, "s{{$.Name}}Client {{ .FunctionName }} Client error %v", err)
+		g.Log().Errorf(ctx, "s{{$.Name}}Client {{.FunctionName}} Client error %v", err)
 		return nil, gerror.NewCode(gcode.CodeInternalError, common_consts.MessageSystemBusy)
 	}
 
 	return &model.{{ .FunctionName }}Output{}, nil
 }
 
-type {{ .FunctionName }}Input struct {
-    {{range .Request.Fields }}
-        {{ .Name}} {{ .Type}}
+type {{.FunctionName}}Input struct {
+    {{range .Request.Fields}}{{.Name}} {{.Type}}
     {{end}}
 }
 
-type {{ .FunctionName }}Output struct {
-    {{range .Response.Fields }}
-        {{ .Name}} {{ .Type}}
+type {{.FunctionName}}Output struct {
+    {{range .Response.Fields}}{{.Name}} {{.Type}}
     {{end}}
 }
 {{else if eq .Method "POST"}}
