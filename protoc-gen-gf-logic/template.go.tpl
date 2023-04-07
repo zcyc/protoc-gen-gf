@@ -11,11 +11,15 @@ func init() {
 {{range .Methods}}
 {{if eq .Method "GET"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (out *model.{{.FunctionName}}Output, err error) {
-	var list []*entity.{{$.Name}}
+	{{if .IsListMethod}}var list []*entity.{{$.Name}}
 	d := dao.{{$.Name}}.Ctx(ctx)
-	{{range .Request.Fields }}d = d.Where(dao.{{$.Name}}.Columns().{{ .Name}}, in.{{ .Name}})
+	{{range .Request.Fields }}{{if ne .Name "Page"}}{{if ne .Name "PageSize"}}if !g.IsEmpty(in.{{.Name}}) {
+		d = d.Where(dao.{{$.Name}}.Columns().{{.Name}}, in.{{.Name}})
+	}
     {{end}}
-	err = d.Scan(&list)
+	{{end}}
+	{{end}}
+	err = d.Page(in.Page, in.PageSize).Scan(&list)
 	if err != nil {
 		return
 	}
@@ -23,6 +27,18 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	return &model.{{ .FunctionName }}Output{
 		{{$.Name}}List: list,
 	}, nil
+	{{else}}
+	one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
+	if err != nil {
+		return
+	}
+	if one.IsEmpty() {
+		return
+	}
+
+	one.Struct(&out)
+	return
+	{{end}}
 }
 
 {{else if eq .Method "POST"}}

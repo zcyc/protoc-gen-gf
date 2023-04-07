@@ -46,28 +46,6 @@ type field struct {
 	Type string
 }
 
-// hasPathParams 是否包含路由参数
-func (m *methodDesc) hasPathParams() bool {
-	paths := strings.Split(m.Path, "/")
-	for _, p := range paths {
-		if len(p) > 0 && (p[0] == '{' && p[len(p)-1] == '}' || p[0] == ':') {
-			return true
-		}
-	}
-	return false
-}
-
-// initPathParams 转换参数路由 {xx} --> :xx
-func (m *methodDesc) initPathParams() {
-	paths := strings.Split(m.Path, "/")
-	for i, p := range paths {
-		if len(p) > 0 && (p[0] == '{' && p[len(p)-1] == '}' || p[0] == ':') {
-			paths[i] = ":" + p[1:len(p)-1]
-		}
-	}
-	m.Path = strings.Join(paths, "/")
-}
-
 func (s *serviceDesc) execute() string {
 	if s.MethodSet == nil {
 		s.MethodSet = map[string]*methodDesc{}
