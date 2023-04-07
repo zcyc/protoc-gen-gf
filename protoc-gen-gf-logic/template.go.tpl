@@ -27,8 +27,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	return &model.{{ .FunctionName }}Output{
 		{{$.Name}}List: list,
 	}, nil
-	{{else}}
-	one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
+	{{else}}one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
 	if err != nil {
 		return
 	}
@@ -37,8 +36,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	}
 
 	one.Struct(&out)
-	return
-	{{end}}
+	return{{end}}
 }
 
 {{else if eq .Method "POST"}}
