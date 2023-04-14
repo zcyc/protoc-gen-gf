@@ -8,6 +8,7 @@ Generate [GoFrame](https://github.com/gogf/gf) business via ProtoBuf
 - [protoc-gen-gf-controller](./protoc-gen-gf-controller) for controller
 - [protoc-gen-gf-logic](./protoc-gen-gf-logic) for logic
 - [protoc-gen-gf-client](./protoc-gen-gf-client) for client
+- [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) for proto
 
 ## Environment
 
