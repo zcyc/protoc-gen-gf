@@ -5,19 +5,17 @@ var (
 type c{{$.Name}} struct{}
 
 {{range .Methods}}
+{{if eq .Method "GET"}}
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
-	// 调用 service 处理请求
 	r, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{.Name}}: req.{{.Name}},
          {{end}}
 	})
 
-	// 返回错误消息
 	if err != nil {
-		return nil, gerror.NewCode(gcode.CodeInternalError, err.Error())
+		return err
 	}
 
-	// 返回成功信息
 	g.RequestFromCtx(ctx).Response.WriteJson(&ghttp.DefaultHandlerResponse{
 		Code:    gcode.CodeOK.Code(),
 		Message: "succeed",
@@ -25,4 +23,21 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 	})
 	return
 }
+{{else}}
+func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
+	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
+         {{range .Request.Fields}}{{.Name}}: req.{{.Name}},
+         {{end}}
+	});err != nil {
+		return nil, err
+	}
+
+	g.RequestFromCtx(ctx).Response.WriteJson(&ghttp.DefaultHandlerResponse{
+		Code:    gcode.CodeOK.Code(),
+		Message: "succeed",
+		Data:    nil,
+	})
+	return
+}
+{{end}}
 {{end}}
