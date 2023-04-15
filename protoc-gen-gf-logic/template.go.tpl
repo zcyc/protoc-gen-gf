@@ -16,9 +16,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	{{range .Request.Fields }}{{if ne .Name "Page"}}{{if ne .Name "PageSize"}}if !g.IsEmpty(in.{{.Name}}) {
 		d = d.Where(dao.{{$.Name}}.Columns().{{.Name}}, in.{{.Name}})
 	}
-    {{end}}
-	{{end}}
-	{{end}}
+    {{end}}{{end}}{{end}}
 	if err := d.Page(in.Page, in.PageSize).Scan(&list);err != nil {
 		return
 	}
@@ -45,11 +43,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
         {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
-        {{end}}
-		{{end}}
-		{{end}}
-		{{end}}
-		{{end}}
+        {{end}}{{end}}{{end}}{{end}}{{end}}
 	}
 	if _, err = dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
 		return
@@ -62,10 +56,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
             {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
-            {{end}}
-			{{end}}
-			{{end}}
-			{{end}}
+            {{end}}{{end}}{{end}}{{end}}
     	}
 	if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
 		return

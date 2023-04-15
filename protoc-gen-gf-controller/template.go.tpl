@@ -27,11 +27,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
 	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: req.{{.Name}},
-         {{end}}
-		 {{end}}
-		 {{end}}
-		 {{end}}
-		 {{end}}
+         {{end}}{{end}}{{end}}{{end}}{{end}}
 	});err != nil {
 		return nil, err
 	}
@@ -47,10 +43,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
 	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: req.{{.Name}},
-         {{end}}
-		 {{end}}
-		 {{end}}
-		 {{end}}
+         {{end}}{{end}}{{end}}{{end}}
 	});err != nil {
 		return nil, err
 	}
