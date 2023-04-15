@@ -85,3 +85,8 @@ func (m *methodDesc) FunctionName() string {
 func (s *serviceDesc) LowerServiceName() string {
 	return strings.ToLower(s.Name)
 }
+
+// isListMethod 判断是不是需要 list 接口，是的话需要 page 参数。
+func (m *methodDesc) IsListMethod() bool {
+	return m.Name[0:4] == "List"
+}

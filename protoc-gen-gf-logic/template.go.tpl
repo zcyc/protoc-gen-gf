@@ -18,9 +18,8 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	}
     {{end}}{{end}}{{end}}
 	if err := d.Page(in.Page, in.PageSize).Scan(&list);err != nil {
-		return
+		return nil, err
 	}
-
 	return &model.{{ .FunctionName }}Output{
 		List: list,
 	}, nil
@@ -31,11 +30,9 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	if one.IsEmpty() {
 		return
 	}
-
 	if err := one.Struct(&out);err != nil{
-		return
+		return nil, err
 	}
-
 	return{{end}}
 }
 
@@ -45,11 +42,10 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
         {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
         {{end}}{{end}}{{end}}{{end}}{{end}}
 	}
-	if _, err = dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
-		return
+	if _, err := dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
+		return nil, err
 	}
-
-	return nil
+	return
 }
 
 {{else if eq .Method "PUT"}}
@@ -58,19 +54,18 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
             {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
             {{end}}{{end}}{{end}}{{end}}
     	}
-	if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
-		return
+	if _, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
+		return nil, err
 	}
-
-	return nil
+	return
 }
 
 {{else if eq .Method "DELETE"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
-    if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete();err != nil {
-        return
+    if _, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete();err != nil {
+        return nil, err
     }
-    return nil
+    return
 }
 {{end}}
 {{end}}
