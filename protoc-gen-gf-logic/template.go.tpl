@@ -44,8 +44,12 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 {{else if eq .Method "POST"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
-        {{range .Request.Fields}}{{.Name}}: in.{{.Name}},
+        {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
         {{end}}
+		{{end}}
+		{{end}}
+		{{end}}
+		{{end}}
 	}
 	if _, err = dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
 		return
@@ -57,8 +61,11 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 {{else if eq .Method "PUT"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
-            {{range .Request.Fields}}{{.Name}}: in.{{.Name}},
+            {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
             {{end}}
+			{{end}}
+			{{end}}
+			{{end}}
     	}
 	if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
 		return
