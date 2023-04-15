@@ -1,14 +1,14 @@
 # protoc-gen-gf
 
-Generate [GoFrame](https://github.com/gogf/gf) business via ProtoBuf
+Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 
 ## Introduction
 
 - [protoc-gen-gf-api](./protoc-gen-gf-api) for api
 - [protoc-gen-gf-controller](./protoc-gen-gf-controller) for controller
 - [protoc-gen-gf-logic](./protoc-gen-gf-logic) for logic
+- [protoc-gen-gf-model](./protoc-gen-gf-model) for model
 - [protoc-gen-gf-client](./protoc-gen-gf-client) for client
-- [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) for proto
 
 ## Environment
 
@@ -83,14 +83,12 @@ service Blog {
   rpc GetArticles(GetArticlesRequest) returns (GetArticlesResponse) {
     option (google.api.http) = {
       get: "/v1/articles"
-      // You can add multiple http routes using additional_bindings
-      // additional_bindings {
-      //   get: "/v1/author/{author_id}/articles"
-      //}
     };
   }
 }
 ```
+
+You can use [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) to generate proto file
 
 ## Thanks
 
