@@ -1,11 +1,11 @@
 type s{{$.Name}} struct{}
 
-func New() *s{{$.Name}} {
+func {{$.Name}}New() *s{{$.Name}} {
 	return &s{{$.Name}}{}
 }
 
 func init() {
-	service.Register{{$.Name}}(New())
+	service.Register{{$.Name}}({{$.Name}}New())
 }
 
 {{range .Methods}}
@@ -19,13 +19,12 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
     {{end}}
 	{{end}}
 	{{end}}
-	err = d.Page(in.Page, in.PageSize).Scan(&list)
-	if err != nil {
+	if err := d.Page(in.Page, in.PageSize).Scan(&list);err != nil {
 		return
 	}
 
 	return &model.{{ .FunctionName }}Output{
-		{{$.Name}}List: list,
+		List: list,
 	}, nil
 	{{else}}one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
 	if err != nil {
@@ -35,7 +34,10 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 		return
 	}
 
-	one.Struct(&out)
+	if err := one.Struct(&out);err != nil{
+		return
+	}
+
 	return{{end}}
 }
 
@@ -45,8 +47,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
         {{range .Request.Fields}}{{.Name}}: in.{{.Name}},
         {{end}}
 	}
-	err = dao.{{$.Name}}.Ctx(ctx).Data({{ $.LowerServiceName }}).Insert()
-	if err != nil {
+	if _, err = dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
 		return
 	}
 
@@ -59,8 +60,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
             {{range .Request.Fields}}{{.Name}}: in.{{.Name}},
             {{end}}
     	}
-	err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.Name}}).Update()
-	if err != nil {
+	if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
 		return
 	}
 
@@ -69,8 +69,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 
 {{else if eq .Method "DELETE"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
-    err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete()
-    if err != nil {
+    if _, err = dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete();err != nil {
         return
     }
     return nil
