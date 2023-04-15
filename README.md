@@ -31,6 +31,7 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest
 go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest
 go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest
 go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
 ```
 
@@ -46,6 +47,7 @@ protoc -I ./api -I $GOPATH/src \
  --gf-api_out ./api --gf-api_opt=paths=source_relative \
  --gf-controller_out ./api --gf-controller_opt=paths=source_relative \
  --gf-logic_out ./api --gf-logic_opt=paths=source_relative \
+ --gf-model_out ./api --gf-model_opt=paths=source_relative \
  --gf-client_out ./api --gf-client_opt=paths=source_relative \
  ./api/v1/article.proto
 ```
@@ -60,6 +62,7 @@ protoc -I ./api -I $env:GOPATH/src `
  --gf-api_out ./api --gf-api_opt=paths=source_relative `
  --gf-controller_out ./api --gf-controller_opt=paths=source_relative `
  --gf-logic_out ./api --gf-logic_opt=paths=source_relative `
+ --gf-model_out ./api --gf-model_opt=paths=source_relative `
  --gf-client_out ./api --gf-client_opt=paths=source_relative `
  ./api/v1/article.proto
 ```
@@ -72,6 +75,7 @@ protoc -I ./api -I %GOPATH%/src ^
  --gf-api_out ./api --gf-api_opt=paths=source_relative ^
  --gf-controller_out ./api --gf-controller_opt=paths=source_relative ^
  --gf-logic_out ./api --gf-logic_opt=paths=source_relative ^
+ --gf-model_out ./api --gf-model_opt=paths=source_relative ^
  --gf-client_out ./api --gf-client_opt=paths=source_relative ^
  ./api/v1/article.proto
 ```
