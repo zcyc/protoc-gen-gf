@@ -13,7 +13,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 	})
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	g.RequestFromCtx(ctx).Response.WriteJson(&ghttp.DefaultHandlerResponse{
@@ -25,7 +25,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 }
 {{else if eq .Method "POST"}}
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
-	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
+	if err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: req.{{.Name}},
          {{end}}{{end}}{{end}}{{end}}{{end}}
 	});err != nil {
@@ -41,7 +41,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 }
 {{else if eq .Method "PUT"}}
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
-	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
+	if err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: req.{{.Name}},
          {{end}}{{end}}{{end}}{{end}}
 	});err != nil {
@@ -57,7 +57,7 @@ func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.Function
 }
 {{else if eq .Method "DELETE"}}
 func (c *c{{$.Name}}) {{.FunctionName}}(ctx context.Context, req *v1.{{.FunctionName }}Req) (res *v1.{{.FunctionName}}Res, err error) {
-	if _, err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
+	if err := service.{{$.Name}}().{{.FunctionName}}(ctx, &model.{{.FunctionName}}Input{
          {{range .Request.Fields}}{{.Name}}: req.{{.Name}},
 		 {{end}}
 	});err != nil {
