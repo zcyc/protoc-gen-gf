@@ -1,8 +1,10 @@
 {{range .Methods}}
 {{if eq .Method "GET"}}
 type {{ .FunctionName }}Input struct {
-    {{range .Request.Fields }}{{.Name}} {{.Type}}
-    {{end}}
+    {{if .IsListMethod}}List  []interface{} `json:"list"`
+	Total int           `json:"total"`
+    {{else}}{{range .Request.Fields }}{{.Name}} {{.Type}}
+    {{end}}{{end}}
 }
 
 type {{ .FunctionName }}Output struct {
