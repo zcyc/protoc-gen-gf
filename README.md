@@ -26,13 +26,39 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 
 ## Install
 
+### macOS & Linux
+
+```shell
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+```
+
+### Windows
+
+#### PowerShell
+
+```powershell
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && `
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+```
+
+#### CMD
+
 ```bash
-go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && ^
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
 ```
 
 ## Usage
