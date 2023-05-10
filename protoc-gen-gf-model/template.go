@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"strings"
+	"unicode"
 )
 
 //go:embed template.go.tpl
@@ -65,12 +66,6 @@ func (s *serviceDesc) execute() string {
 	return buf.String()
 }
 
-// InterfaceName service interface name
-func (s *serviceDesc) InterfaceName() string {
-	// return s.Name + "HTTPServer"
-	return s.Name
-}
-
 // FunctionName for func name
 func (m *methodDesc) FunctionName() string {
 	// 如果方法对应的接口数量大于0个就给方法名后面就上序号
@@ -81,7 +76,40 @@ func (m *methodDesc) FunctionName() string {
 	}
 }
 
-// LowerServiceName lower service name
+// 小驼峰
 func (s *serviceDesc) LowerServiceName() string {
-	return strings.ToLower(s.Name)
+	if len(s.Name) == 0 {
+		return s.Name
+	}
+	firstChar := strings.ToLower(string(s.Name[0]))
+	return firstChar + s.Name[1:]
+}
+
+// 横杠分割
+func (s *serviceDesc) KebabServiceName() string {
+	var result strings.Builder
+	for i, char := range s.Name {
+		if i > 0 && unicode.IsUpper(char) {
+			result.WriteRune('-')
+		}
+		result.WriteRune(unicode.ToLower(char))
+	}
+	return result.String()
+}
+
+// 下划线
+func (s *serviceDesc) SnakeServiceName() string {
+	var result strings.Builder
+	for i, char := range s.Name {
+		if i > 0 && unicode.IsUpper(char) {
+			result.WriteRune('_')
+		}
+		result.WriteRune(unicode.ToLower(char))
+	}
+	return result.String()
+}
+
+// isListMethod 判断是不是需要 list 接口
+func (m *methodDesc) IsListMethod() bool {
+	return strings.ToLower(m.Name)[0:4] == "list"
 }
