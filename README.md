@@ -69,13 +69,13 @@ Demo: [protoc-gen-gf-example](./example)
 
 ```shell
 protoc -I ./api -I $GOPATH/src \
- --go_out ./api --go_opt=paths=source_relative \
- --gf-api_out ./api --gf-api_opt=paths=source_relative \
- --gf-controller_out ./api --gf-controller_opt=paths=source_relative \
- --gf-logic_out ./api --gf-logic_opt=paths=source_relative \
- --gf-model_out ./api --gf-model_opt=paths=source_relative \
- --gf-client_out ./api --gf-client_opt=paths=source_relative \
- ./api/v1/article.proto
+       --go_out ./api --go_opt=paths=source_relative \
+       --gf-api_out ./api --gf-api_opt=paths=source_relative \
+       --gf-controller_out ./api --gf-controller_opt=paths=source_relative \
+       --gf-logic_out ./api --gf-logic_opt=paths=source_relative \
+       --gf-model_out ./api --gf-model_opt=paths=source_relative \
+       --gf-client_out ./api --gf-client_opt=paths=source_relative \
+       ./api/v1/article.proto
 ```
 
 ### Windows
@@ -84,26 +84,26 @@ protoc -I ./api -I $GOPATH/src \
 
 ```powershell
 protoc -I ./api -I $env:GOPATH/src `
- --go_out ./api --go_opt=paths=source_relative `
- --gf-api_out ./api --gf-api_opt=paths=source_relative `
- --gf-controller_out ./api --gf-controller_opt=paths=source_relative `
- --gf-logic_out ./api --gf-logic_opt=paths=source_relative `
- --gf-model_out ./api --gf-model_opt=paths=source_relative `
- --gf-client_out ./api --gf-client_opt=paths=source_relative `
- ./api/v1/article.proto
+       --go_out ./api --go_opt=paths=source_relative `
+       --gf-api_out ./api --gf-api_opt=paths=source_relative `
+       --gf-controller_out ./api --gf-controller_opt=paths=source_relative `
+       --gf-logic_out ./api --gf-logic_opt=paths=source_relative `
+       --gf-model_out ./api --gf-model_opt=paths=source_relative `
+       --gf-client_out ./api --gf-client_opt=paths=source_relative `
+       ./api/v1/article.proto
 ```
 
 #### CMD
 
 ```bash
 protoc -I ./api -I %GOPATH%/src ^
- --go_out ./api --go_opt=paths=source_relative ^
- --gf-api_out ./api --gf-api_opt=paths=source_relative ^
- --gf-controller_out ./api --gf-controller_opt=paths=source_relative ^
- --gf-logic_out ./api --gf-logic_opt=paths=source_relative ^
- --gf-model_out ./api --gf-model_opt=paths=source_relative ^
- --gf-client_out ./api --gf-client_opt=paths=source_relative ^
- ./api/v1/article.proto
+       --go_out ./api --go_opt=paths=source_relative ^
+       --gf-api_out ./api --gf-api_opt=paths=source_relative ^
+       --gf-controller_out ./api --gf-controller_opt=paths=source_relative ^
+       --gf-logic_out ./api --gf-logic_opt=paths=source_relative ^
+       --gf-model_out ./api --gf-model_opt=paths=source_relative ^
+       --gf-client_out ./api --gf-client_opt=paths=source_relative ^
+       ./api/v1/article.proto
 ```
 
 ## Convention
