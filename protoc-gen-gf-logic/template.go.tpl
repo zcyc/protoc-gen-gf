@@ -17,11 +17,19 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 		d = d.Where(dao.{{$.Name}}.Columns().{{.Name}}, in.{{.Name}})
 	}
     {{end}}{{end}}{{end}}
+	count, err := d.Count()
+	if err != nil {
+		return nil, err
+	}
+	if count == 0 {
+		return
+	}
 	if err := d.Page(in.Page, in.PageSize).Scan(&list);err != nil {
 		return nil, err
 	}
 	return &model.{{ .FunctionName }}Output{
 		List: list,
+		Count: count,
 	}, nil
 	{{else}}one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
 	if err != nil {
