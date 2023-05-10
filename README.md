@@ -63,7 +63,7 @@ go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest ^
 
 ## Usage
 
-Demo: [protoc-gen-gf-example](./example)
+Demo: [artcle](./example)
 
 ### macOS & Linux
 
@@ -106,17 +106,13 @@ protoc -I ./api -I %GOPATH%/src ^
        ./api/v1/article.proto
 ```
 
-## Convention
+## Notice
 
-```protobuf
-service Blog {
-  rpc GetArticles(GetArticlesRequest) returns (GetArticlesResponse) {
-    option (google.api.http) = {
-      get: "/v1/articles"
-    };
-  }
-}
-```
+- Initialize your DB and NoSQL in cmd
+- Initialize your logic in cmd
+- Initialize your controller in cmd
+
+## Protobuf
 
 You can use [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) to generate proto file
 
