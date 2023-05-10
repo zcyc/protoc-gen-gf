@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package test;
+option go_package = "/test";
+
+
+// The User1 service definition.
+service User1 {
+  rpc GetUser1(User1Filter) returns (User1Response) {
+    option (google.api.http) = {
+		get: "/v1/user1"
+	};
+
+ }
+  rpc UpdateUser1(User1Request) returns (User1Response) {
+    option (google.api.http) = {
+		put: "/v1/user1"
+	};
+
+ }
+  rpc DeleteUser1(User1Filter) returns (User1Response) {
+    option (google.api.http) = {
+		delete: "/v1/user1"
+	};
+
+ }
+  rpc CreateUser1(User1Request) returns (User1Response) {
+    option (google.api.http) = {
+		post: "/v1/user1"
+	};
+
+ }
+  rpc ListUser1(User1Page) returns (User1Response) {
+    option (google.api.http) = {
+		get: "/v1/user1/list"
+	};
+
+ }
+ 
+}
+
+message User1Request {
+ string created_at = 1; // 创建时间
+ int32 id = 2; // 主键
+ string password = 3; // 密码
+ string username = 4; // 用户名
+}
+
+message User1Filter {
+ string id = 1;
+}
+
+message User1Page {
+ int64 page = 1; // 第几页
+ int64 page_size = 2; // 每页数量
+}
+
+message User1Response {
+ int32 code = 1; // 错误码
+ string message = 2; // 错误信息
+ string data = 3; // 返回值，使用前将类型改成 any
+}
+
+
+// The User1Copy1 service definition.
+service User1Copy1 {
+  rpc GetUser1Copy1(User1Copy1Filter) returns (User1Copy1Response) {
+    option (google.api.http) = {
+		get: "/v1/user1-copy1"
+	};
+
+ }
+  rpc UpdateUser1Copy1(User1Copy1Request) returns (User1Copy1Response) {
+    option (google.api.http) = {
+		put: "/v1/user1-copy1"
+	};
+
+ }
+  rpc DeleteUser1Copy1(User1Copy1Filter) returns (User1Copy1Response) {
+    option (google.api.http) = {
+		delete: "/v1/user1-copy1"
+	};
+
+ }
+  rpc CreateUser1Copy1(User1Copy1Request) returns (User1Copy1Response) {
+    option (google.api.http) = {
+		post: "/v1/user1-copy1"
+	};
+
+ }
+  rpc ListUser1Copy1(User1Copy1Page) returns (User1Copy1Response) {
+    option (google.api.http) = {
+		get: "/v1/user1-copy1/list"
+	};
+
+ }
+ 
+}
+
+message User1Copy1Response {
+ int32 code = 1; // 错误码
+ string message = 2; // 错误信息
+ string data = 3; // 返回值，使用前将类型改成 any
+}
+
+message User1Copy1Request {
+ string created_at = 1; // 创建时间
+ int32 id = 2; // 主键
+ string password = 3; // 密码
+ string username = 4; // 用户名
+}
+
+message User1Copy1Filter {
+ string id = 1;
+}
+
+message User1Copy1Page {
+ int64 page = 1; // 第几页
+ int64 page_size = 2; // 每页数量
+}
+
+

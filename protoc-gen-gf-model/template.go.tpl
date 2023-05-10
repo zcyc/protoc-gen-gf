@@ -1,15 +1,15 @@
 {{range .Methods}}
 {{if eq .Method "GET"}}
 type {{ .FunctionName }}Input struct {
-    {{if .IsListMethod}}List  []interface{} `json:"list"`
-	Total int           `json:"total"`
-    {{else}}{{range .Request.Fields }}{{.Name}} {{.Type}}
-    {{end}}{{end}}
+    {{range .Request.Fields }}{{.Name}} {{.Type}}
+    {{end}}
 }
 
 type {{ .FunctionName }}Output struct {
-    {{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
-    {{end}}{{end}}{{end}}
+    {{if .IsListMethod}}List  []interface{} `json:"list"`
+	Total int           `json:"total"`
+    {{else}}{{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
+    {{end}}{{end}}{{end}}{{end}}
 }
 {{else if eq .Method "POST"}}
 type {{ .FunctionName }}Input struct {
