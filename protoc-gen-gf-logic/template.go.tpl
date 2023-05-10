@@ -43,7 +43,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
         {{end}}{{end}}{{end}}{{end}}{{end}}
 	}
 	if _, err := dao.{{$.Name}}.Ctx(ctx).Data({{$.LowerServiceName}}).Insert();err != nil {
-		return nil, err
+		return err
 	}
 	return
 }
@@ -55,7 +55,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
             {{end}}{{end}}{{end}}{{end}}
     	}
 	if _, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Data({{$.LowerServiceName}}).Update();err != nil {
-		return nil, err
+		return err
 	}
 	return
 }
@@ -63,7 +63,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 {{else if eq .Method "DELETE"}}
 func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
     if _, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete();err != nil {
-        return nil, err
+        return err
     }
     return
 }
