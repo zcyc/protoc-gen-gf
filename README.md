@@ -10,6 +10,18 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 - [protoc-gen-gf-model](./protoc-gen-gf-model) for model
 - [protoc-gen-gf-client](./protoc-gen-gf-client) for client
 
+## Workflow
+- Generate the `proto` file
+- Adjust the `services` and `messages` in the `proto`
+- Use the `current tool` to generate CRUD code
+- Copy the `files` to the `package` you want to place
+- Adjust the fields of `Req` and `Res` in the `api`
+- Adjust the fields of `Input` and `Output` in the `model`
+- Initialize your `DB` and `NoSQL` in `cmd`
+- Initialize your `logic` in `cmd`
+- Initialize your `controller` in `cmd`
+- Run and test
+
 ## Environment
 
 ### Download clis
@@ -105,12 +117,6 @@ protoc -I ./api -I %GOPATH%/src ^
        --gf-client_out ./api --gf-client_opt=paths=source_relative ^
        ./api/v1/article.proto
 ```
-
-## Notice
-
-- Initialize your DB and NoSQL in cmd
-- Initialize your logic in cmd
-- Initialize your controller in cmd
 
 ## Protobuf
 
