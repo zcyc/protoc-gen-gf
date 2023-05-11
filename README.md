@@ -11,9 +11,9 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 - [protoc-gen-gf-client](./protoc-gen-gf-client) for client
 
 ## Workflow
-- Generate the `proto` file
+- Generate the `proto` file by [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) 
 - Adjust the `services` and `messages` in the `proto`
-- Use the `current tool` to generate CRUD code
+- Generate the CRUD code by `protoc-gen-gf`
 - Copy the `files` to the `package` you want to place
 - Adjust the fields of `Req` and `Res` in the `api`
 - Adjust the fields of `Input` and `Output` in the `model`
@@ -75,8 +75,6 @@ go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest ^
 
 ## Usage
 
-Demo: [artcle](./example)
-
 ### macOS & Linux
 
 ```shell
@@ -118,9 +116,9 @@ protoc -I ./api -I %GOPATH%/src ^
        ./api/v1/article.proto
 ```
 
-## Protobuf
+## Demo
 
-You can use [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) to generate proto file
+[artcle](./example)
 
 ## Thanks
 
