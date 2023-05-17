@@ -29,7 +29,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	}
 	return &model.{{ .FunctionName }}Output{
 		List: list,
-		Count: count,
+		Total: count,
 	}, nil
 	{{else}}one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
 	if err != nil {
