@@ -17,6 +17,7 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 - Copy the `files` to the `package` you want to place
 - Adjust the fields of `Req` and `Res` in the `api`
 - Adjust the fields of `Input` and `Output` in the `model`
+- Adjust the functions in the `logic`
 - Initialize your `DB` and `NoSQL` in the `cmd`
 - Initialize your `logic` in the `cmd`
 - Initialize your `controller` in the `cmd`
