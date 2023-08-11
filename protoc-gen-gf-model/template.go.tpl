@@ -6,8 +6,8 @@ type {{ .FunctionName }}Input struct {
 }
 
 type {{ .FunctionName }}Output struct {
-    {{if .IsListMethod}}List  []interface{} `json:"list"`
-	Total int           `json:"total"`
+    {{if .IsListMethod}}List any `json:"list"`
+	Total int `json:"total"`
     {{else}}{{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
     {{end}}{{end}}{{end}}{{end}}
 }
