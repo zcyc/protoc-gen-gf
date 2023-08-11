@@ -27,7 +27,7 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 
 ### Download clis
 
-- [go 1.16+](https://golang.org/dl/)
+- [go 1.18+](https://golang.org/dl/)
 - [protoc](https://github.com/protocolbuffers/protobuf/releases)
 
 ### Download protos
