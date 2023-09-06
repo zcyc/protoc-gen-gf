@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package test;
+option go_package = "/test";
+
+
+// The User1 service definition.
+service User1 {
+	rpc User1(User1Request) returns (User1Request) {
+		option (google.api.http) = {
+			patch: "/user1"
+		};
+	}
+}
+
+message User1Request {
+ string created_at = 1; // 创建时间
+ int32 id = 2; // 主键
+ string password = 3; // 密码
+ string username = 4; // 用户名
+}
+
+// The User1Copy1 service definition.
+service User1Copy1 {
+	rpc User1Copy1(User1Copy1Request) returns (User1Copy1Request) {
+		option (google.api.http) = {
+			patch: "/user1-copy1"
+		};
+	}
+}
+
+message User1Copy1Request {
+ string created_at = 1; // 创建时间
+ int32 id = 2; // 主键
+ string password = 3; // 密码
+ string username = 4; // 用户名
+}
+
