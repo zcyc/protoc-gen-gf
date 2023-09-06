@@ -11,7 +11,7 @@ func init() {
 {{range .Methods}}
 {{if eq .Method "PATCH"}}
 func (s *s{{$.Name}}) List{{.FunctionName}} (ctx context.Context, in *model.List{{.FunctionName}}Input) (out *model.List{{.FunctionName}}Output, err error) {
-	var list []*entity.{{$.Name}}
+	var list []*model.Get{{.FunctionName}}Output
 	d := dao.{{$.Name}}.Ctx(ctx)
 	// d = d.Where(dao.{{$.Name}}.Columns().Name, in.Keyword)
 	count, err := d.Count()
