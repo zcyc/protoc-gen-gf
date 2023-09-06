@@ -1,30 +1,43 @@
 {{range .Methods}}
-{{if eq .Method "GET"}}
-type {{ .FunctionName }}Input struct {
-    {{range .Request.Fields }}{{.Name}} {{.Type}}
-    {{end}}
+{{if eq .Method "PATCH"}}
+type List{{.FunctionName}}Input struct {
+    Page     int
+    PageSize int
+    Keyword  string
 }
 
-type {{ .FunctionName }}Output struct {
-    {{if .IsListMethod}}List any `json:"list"`
+type {{.FunctionName}}Output struct {
+    List  any `json:"list"`
 	Total int `json:"total"`
-    {{else}}{{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
-    {{end}}{{end}}{{end}}{{end}}
 }
-{{else if eq .Method "POST"}}
-type {{ .FunctionName }}Input struct {
+
+type Get{{.FunctionName}}Input struct {
+    Id string
+}
+
+type Get{{.FunctionName}}Output struct {
+    {{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
+    {{end}}{{end}}{{end}}
+}
+
+type Create{{.FunctionName}}Input struct {
     {{range .Request.Fields }}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}} {{.Type}}
     {{end}}{{end}}{{end}}{{end}}{{end}}
 }
-{{else if eq .Method "PUT"}}
-type {{ .FunctionName }}Input struct {
+
+type Update{{.FunctionName}}Input struct {
     {{range .Request.Fields }}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}} {{.Type}}
     {{end}}{{end}}{{end}}{{end}}
 }
-{{else if eq .Method "DELETE"}}
-type {{ .FunctionName }}Input struct {
-    {{range .Request.Fields }}{{.Name}} {{.Type}}
-    {{end}}
+
+type Delete{{.FunctionName}}Input struct {
+    Id string
+}
+{{else}}
+type {{.FunctionName}}Input struct {
+}
+
+type {{.FunctionName}}Output struct {
 }
 {{end}}
 {{end}}
