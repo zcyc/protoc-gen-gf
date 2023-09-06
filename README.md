@@ -43,11 +43,11 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 
 ```shell
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest \
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest \
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest \
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest \
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@main \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@main \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@main \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@main \
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@main
 ```
 
 ### Windows
@@ -56,22 +56,22 @@ go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest \
 
 ```powershell
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && `
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest `
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest `
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest `
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest `
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@main `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@main `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@main `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@main `
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@main
 ```
 
 #### CMD
 
 ```bash
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && ^
-go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@latest ^
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@latest ^
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@latest ^
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@latest ^
-           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@latest
+go install github.com/zcyc/protoc-gen-gf/protoc-gen-gf-api@main ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-controller@main ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-logic@main ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-model@main ^
+           github.com/zcyc/protoc-gen-gf/protoc-gen-gf-client@main
 ```
 
 ## Usage
