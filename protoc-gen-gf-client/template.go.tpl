@@ -52,7 +52,6 @@ func Get{{.FunctionName}} (ctx context.Context, in *Get{{.FunctionName}}Input) (
 	if err := res.Struct(&out);err != nil{
 		return nil, err
 	}
-
 	return
 }
 
@@ -125,4 +124,3 @@ type {{.FunctionName}}Output struct {
 }
 {{end}}
 {{end}}
-
