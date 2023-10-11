@@ -9,14 +9,11 @@ func init() {
 }
 
 {{range .Methods}}
-{{if eq .Method "GET"}}
-func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (out *model.{{.FunctionName}}Output, err error) {
-	{{if .IsListMethod}}var list []*entity.{{$.Name}}
+{{if eq .Method "PATCH"}}
+func (s *s{{$.Name}}) List{{.FunctionName}} (ctx context.Context, in *model.List{{.FunctionName}}Input) (out *model.List{{.FunctionName}}Output, err error) {
+	var list []*model.Get{{.FunctionName}}Output
 	d := dao.{{$.Name}}.Ctx(ctx)
-	{{range .Request.Fields }}{{if ne .Name "Page"}}{{if ne .Name "PageSize"}}if !g.IsEmpty(in.{{.Name}}) {
-		d = d.Where(dao.{{$.Name}}.Columns().{{.Name}}, in.{{.Name}})
-	}
-    {{end}}{{end}}{{end}}
+	// d = d.Where(dao.{{$.Name}}.Columns().Name, in.Keyword)
 	count, err := d.Count()
 	if err != nil {
 		return nil, err
@@ -27,11 +24,16 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	if err := d.Page(in.Page, in.PageSize).Scan(&list);err != nil {
 		return nil, err
 	}
-	return &model.{{ .FunctionName }}Output{
+	return &model.List{{ .FunctionName }}Output{
 		List: list,
 		Total: count,
 	}, nil
-	{{else}}one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
+
+	return
+}
+
+func (s *s{{$.Name}}) Get{{.FunctionName}} (ctx context.Context, in *model.Get{{.FunctionName}}Input) (out *model.Get{{.FunctionName}}Output, err error) {
+	one, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).One()
 	if err != nil {
 		return
 	}
@@ -41,11 +43,10 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	if err := one.Struct(&out);err != nil{
 		return nil, err
 	}
-	return{{end}}
+	return
 }
 
-{{else if eq .Method "POST"}}
-func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
+func (s *s{{$.Name}}) Create{{.FunctionName}} (ctx context.Context, in *model.Create{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
         {{range .Request.Fields}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
         {{end}}{{end}}{{end}}{{end}}
@@ -56,8 +57,7 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	return
 }
 
-{{else if eq .Method "PUT"}}
-func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
+func (s *s{{$.Name}}) Update{{.FunctionName}} (ctx context.Context, in *model.Update{{.FunctionName}}Input) (err error) {
 	{{ $.LowerServiceName }} := &do.{{$.Name}}{
             {{range .Request.Fields}}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}}: in.{{.Name}},
             {{end}}{{end}}{{end}}{{end}}{{end}}
@@ -68,12 +68,16 @@ func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.Funct
 	return
 }
 
-{{else if eq .Method "DELETE"}}
-func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (err error) {
+func (s *s{{$.Name}}) Delete{{.FunctionName}} (ctx context.Context, in *model.Delete{{.FunctionName}}Input) (err error) {
     if _, err := dao.{{$.Name}}.Ctx(ctx).Where(dao.{{$.Name}}.Columns().Id, in.Id).Delete();err != nil {
         return err
     }
     return
+}
+{{else}}
+func (s *s{{$.Name}}) {{.FunctionName}} (ctx context.Context, in *model.{{.FunctionName}}Input) (out *model.{{.FunctionName}}Output, err error) {
+	// TODO 填充逻辑
+	return
 }
 {{end}}
 {{end}}

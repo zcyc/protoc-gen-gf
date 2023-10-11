@@ -15,10 +15,6 @@ import (
 	"google.golang.org/protobuf/types/descriptorpb"
 )
 
-const (
-	contextPackage = protogen.GoImportPath("context")
-)
-
 var methodSets = make(map[string]int)
 
 func generateFile(gen *protogen.Plugin, file *protogen.File, omitempty bool) *protogen.GeneratedFile {

@@ -1,50 +1,67 @@
 {{range .Methods}}
-{{if eq .Method "GET"}}
-type {{ .FunctionName }}Req struct {
-	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`
-    {{range .Request.Fields }}{{.Name}} {{.Type}}
-    {{end}}
+{{if eq .Method "PATCH"}}
+type List{{.FunctionName}}Req struct {
+	g.Meta `path:"{{.Path}}" method:"GET"`
+    Page     int    `json:"page"`
+    PageSize int    `json:"page_size"`
+    Keyword  string `json:"keyword"`
 }
 
-type {{ .FunctionName }}Res struct {
+type List{{.FunctionName}}Res struct {
 	g.Meta `mime:"application/json"`
-    {{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{ .Name}} {{ .Type}}
+    Total int `json:"total"`
+    List  any `json:"list"`
+}
+
+type Get{{.FunctionName}}Req struct {
+	g.Meta `path:"{{.Path}}" method:"GET"`
+    Id string `json:"id"`
+}
+
+type Get{{.FunctionName}}Res struct {
+	g.Meta `mime:"application/json"`
+    {{range .Response.Fields }}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}} {{.Type}}
     {{end}}{{end}}{{end}}
 }
-{{else if eq .Method "POST"}}
-type {{ .FunctionName }}Req struct {
+
+type Create{{.FunctionName}}Req struct {
 	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`
     {{range .Request.Fields }}{{if ne .Name "Id"}}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}} {{.Type}}
     {{end}}{{end}}{{end}}{{end}}{{end}}
 }
 
-type {{ .FunctionName }}Res struct {
+type Create{{.FunctionName}}Res struct {
 	g.Meta `mime:"application/json"`
-    {{range .Response.Fields }}{{ .Name}} {{ .Type}}
-    {{end}}
 }
-{{else if eq .Method "PUT"}}
-type {{ .FunctionName }}Req struct {
-	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`
+
+type Update{{.FunctionName}}Req struct {
+	g.Meta `path:"{{.Path}}" method:"PUT"`
     {{range .Request.Fields }}{{if ne .Name "CreatedAt"}}{{if ne .Name "UpdatedAt"}}{{if ne .Name "DeletedAt"}}{{.Name}} {{.Type}}
     {{end}}{{end}}{{end}}{{end}}
 }
 
-type {{ .FunctionName }}Res struct {
+type Update{{.FunctionName}}Res struct {
 	g.Meta `mime:"application/json"`
-    {{range .Response.Fields }}{{ .Name}} {{ .Type}}
-    {{end}}
 }
-{{else if eq .Method "DELETE"}}
-type {{ .FunctionName }}Req struct {
+
+type Delete{{.FunctionName }}Req struct {
+	g.Meta `path:"{{.Path}}" method:"DELETE"`
+    Id string `json:"id"`
+}
+
+type Delete{{.FunctionName}}Res struct {
+	g.Meta `mime:"application/json"`
+}
+{{else}}
+type {{.FunctionName}}Req struct {
 	g.Meta `path:"{{.Path}}" method:"{{.Method}}"`
     {{range .Request.Fields }}{{.Name}} {{.Type}}
     {{end}}
 }
 
-type {{ .FunctionName }}Res struct {
+type {{.FunctionName}}Res struct {
 	g.Meta `mime:"application/json"`
-    {{range .Response.Fields }}{{ .Name}} {{ .Type}}
+    {{range .Response.Fields}}{{.Name}} {{.Type}}
     {{end}}
 }
 {{end}}
