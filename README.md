@@ -12,7 +12,7 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 
 ## Workflow
 - Generate the `proto` file by [mysql-to-proto](https://github.com/zcyc/mysql-to-proto) 
-- Adjust the `services` and `messages` in the `proto`
+- Adjust the `services` and `messages` in the `proto`, please don't use the `PATCH` method, the generator will generate `CRUD` for it
 - Generate the `CRUD` by `protoc-gen-gf`
 - Copy the `files` to the `package` you want to place
 - Adjust the fields of `Req` and `Res` in the `api`
