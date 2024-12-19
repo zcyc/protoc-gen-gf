@@ -31,11 +31,18 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 - [protoc](https://github.com/protocolbuffers/protobuf/releases)
 
 ### Download protos
-
-1. mkdir $GOPATH/src/google && cd $GOPATH/src/google
-2. git clone --depth 1 https://github.com/googleapis/googleapis.git && mv googleapis/google/api . && rm -rf googleapis
-3. git clone --depth 1 https://github.com/protocolbuffers/protobuf.git protobuf1 && mv protobuf1/src/google/protobuf . && rm -rf protobuf1
-4. find $GOPATH/src/google -type f ! -name "*.proto" -delete && find $GOPATH/src/google -type d -empty -delete
+```shell
+mkdir $GOPATH/src/google && cd $GOPATH/src/google
+```
+```shell
+git clone --depth 1 https://github.com/googleapis/googleapis.git && mv googleapis/google/api . && rm -rf googleapis
+```
+```shell
+git clone --depth 1 https://github.com/protocolbuffers/protobuf.git protobuf1 && mv protobuf1/src/google/protobuf . && rm -rf protobuf1
+```
+```shell
+find $GOPATH/src/google -type f ! -name "*.proto" -delete && find $GOPATH/src/google -type d -empty -delete
+```
 
 ## Install
 
