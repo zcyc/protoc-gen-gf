@@ -35,10 +35,10 @@ Generate [GoFrame](https://github.com/gogf/gf) business via proto file
 mkdir $GOPATH/src/google && cd $GOPATH/src/google
 ```
 ```shell
-git clone --depth 1 https://github.com/googleapis/googleapis.git && mv googleapis/google/api . && rm -rf googleapis
+git clone --depth 1 https://github.com/googleapis/googleapis.git && mv googleapis/google/api $GOPATH/src/google && rm -rf googleapis
 ```
 ```shell
-git clone --depth 1 https://github.com/protocolbuffers/protobuf.git protobuf1 && mv protobuf1/src/google/protobuf . && rm -rf protobuf1
+git clone --depth 1 https://github.com/protocolbuffers/protobuf.git protobuf1 && mv protobuf1/src/google/protobuf $GOPATH/src/google && rm -rf protobuf1
 ```
 ```shell
 find $GOPATH/src/google -type f ! -name "*.proto" -delete && find $GOPATH/src/google -type d -empty -delete
